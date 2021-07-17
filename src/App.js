@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import Banner from './components/banner/Banner';
+import EpisodesList from './components/episodes-list/EpisodesList';
+import Filter from './components/filter/Filter';
+import Header from './components/header/Header';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    season: 5
+  }
+
+  filter = (season) => {
+    this.setState({ season })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Header title="Game of Thrones"/>
+        <Banner/>
+        <Filter onFilter={this.filter}/>
+        <EpisodesList season={this.state.season}/>
+      </div>
+    );
+  }
 }
 
 export default App;
